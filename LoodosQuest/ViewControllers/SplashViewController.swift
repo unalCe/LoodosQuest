@@ -8,19 +8,27 @@
 
 import UIKit
 import Network
+import Hero
 
 let homeSegueIdentifier = "homeSegue"
 
 class SplashViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var splashTextLabel: UILabel!
+    
     private var splashText: String? {
         didSet {
-            splashTextLabel.isHidden = false
             splashTextLabel.text = splashText
             
-            // Wait 3 seconds to perform segue after splash text has been set
-            self.perform(#selector(self.performHomeSegue), with: nil, afterDelay: 3)
+            UIView.animate(withDuration: 0.7, animations: {
+                self.splashTextLabel.isHidden = false
+                self.splashTextLabel.alpha = 1.0
+            }) { (completed) in
+                if completed {
+                    // Wait 3 seconds to perform segue after splash text has been set
+                    self.perform(#selector(self.performHomeSegue), with: nil, afterDelay: 3)
+                }
+            }
         }
     }
     
@@ -35,7 +43,7 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
+        splashTextLabel.alpha = 0
     }
     
     // MARK: - Functions
@@ -64,26 +72,30 @@ class SplashViewController: UIViewController {
         networkMonitor.start(queue: queue)
     }
     
-    /// Fetch splash text from remote config.
+    /// Fetch splash text from Remote Config.
     private func fetchSplashTextFromRemoteConfig() {
-        let rcFetcher = RCFetcher.rcFetcher
-        
-        rcFetcher.fetchCompleteCallBack = { [weak self] in
+        RCFetcher.rcFetcher.fetchCompleteCallBack = { [weak self] in
             // Fetch raw string from Remote Config
-            let rawString = rcFetcher.stringValue(for: .splash_text)
+            let rawString = RCFetcher.rcFetcher.stringValue(for: .splash_text)
+            
             // Remove the " character from string
             self?.splashText = rawString?.replacingOccurrences(of: "\"", with: "")
         }
     }
     
-    @objc func performHomeSegue() {
-        performSegue(withIdentifier: homeSegueIdentifier, sender: nil)
-    }
-    
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == homeSegueIdentifier {
-            // Navigation controller
+            let dest = segue.destination as! UINavigationController
+            // Enable Hero transitions
+            dest.hero.isEnabled = true
+            // Selecting the Hero transition style
+            dest.hero.modalAnimationType = .selectBy(presenting: .zoomSlide(direction: .left), dismissing: .zoomSlide(direction: .right))
         }
+    }
+    
+    @objc func performHomeSegue() {
+        self.performSegue(withIdentifier: homeSegueIdentifier, sender: nil)
     }
 }
 
