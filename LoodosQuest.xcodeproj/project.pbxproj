@@ -3,25 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20DB284997C3593E577595A7 /* Pods_LoodosQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F909FFD355D51C01A09383 /* Pods_LoodosQuest.framework */; };
 		90794F8122DE1F9F001A8C5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90794F8022DE1F9F001A8C5F /* AppDelegate.swift */; };
-		90794F8322DE1F9F001A8C5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90794F8222DE1F9F001A8C5F /* ViewController.swift */; };
+		90794F8322DE1F9F001A8C5F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90794F8222DE1F9F001A8C5F /* SplashViewController.swift */; };
 		90794F8622DE1F9F001A8C5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90794F8422DE1F9F001A8C5F /* Main.storyboard */; };
 		90794F8822DE1FA0001A8C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90794F8722DE1FA0001A8C5F /* Assets.xcassets */; };
 		90794F8B22DE1FA0001A8C5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90794F8922DE1FA0001A8C5F /* LaunchScreen.storyboard */; };
+		908F72BB22DF167B0065FADF /* RCFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72BA22DF167B0065FADF /* RCFetcher.swift */; };
+		908F72BD22DF253D0065FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72BC22DF253D0065FADF /* HomeViewController.swift */; };
+		90DCFC2F22DE59D6005A23EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06F909FFD355D51C01A09383 /* Pods_LoodosQuest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoodosQuest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F696E5E8594977933C0EFD6 /* Pods-LoodosQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoodosQuest.release.xcconfig"; path = "Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest.release.xcconfig"; sourceTree = "<group>"; };
 		90794F7D22DE1F9F001A8C5F /* LoodosQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoodosQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90794F8022DE1F9F001A8C5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		90794F8222DE1F9F001A8C5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		90794F8222DE1F9F001A8C5F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		90794F8522DE1F9F001A8C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		90794F8722DE1FA0001A8C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90794F8A22DE1FA0001A8C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90794F8C22DE1FA0001A8C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		908F72BA22DF167B0065FADF /* RCFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCFetcher.swift; sourceTree = "<group>"; };
+		908F72BC22DF253D0065FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C68411CB0786A872F90BDB0D /* Pods-LoodosQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoodosQuest.debug.xcconfig"; path = "Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20DB284997C3593E577595A7 /* Pods_LoodosQuest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EB0DEFBC7C2018172B381ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				06F909FFD355D51C01A09383 /* Pods_LoodosQuest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		90794F7422DE1F9F001A8C5F = {
 			isa = PBXGroup;
 			children = (
 				90794F7F22DE1F9F001A8C5F /* LoodosQuest */,
 				90794F7E22DE1F9F001A8C5F /* Products */,
+				9EF5EF84399008D6AC5B0F70 /* Pods */,
+				2EB0DEFBC7C2018172B381ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +75,50 @@
 		90794F7F22DE1F9F001A8C5F /* LoodosQuest */ = {
 			isa = PBXGroup;
 			children = (
-				90794F8022DE1F9F001A8C5F /* AppDelegate.swift */,
-				90794F8222DE1F9F001A8C5F /* ViewController.swift */,
+				908F72B722DF15740065FADF /* Network */,
+				90DCFC2D22DE43C5005A23EA /* ViewControllers */,
+				90DCFC2C22DE43B1005A23EA /* Helper */,
 				90794F8422DE1F9F001A8C5F /* Main.storyboard */,
+			);
+			path = LoodosQuest;
+			sourceTree = "<group>";
+		};
+		908F72B722DF15740065FADF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				908F72BA22DF167B0065FADF /* RCFetcher.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		90DCFC2C22DE43B1005A23EA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				90794F8022DE1F9F001A8C5F /* AppDelegate.swift */,
 				90794F8722DE1FA0001A8C5F /* Assets.xcassets */,
 				90794F8922DE1FA0001A8C5F /* LaunchScreen.storyboard */,
 				90794F8C22DE1FA0001A8C5F /* Info.plist */,
+				90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */,
 			);
-			path = LoodosQuest;
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		90DCFC2D22DE43C5005A23EA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				90794F8222DE1F9F001A8C5F /* SplashViewController.swift */,
+				908F72BC22DF253D0065FADF /* HomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9EF5EF84399008D6AC5B0F70 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C68411CB0786A872F90BDB0D /* Pods-LoodosQuest.debug.xcconfig */,
+				6F696E5E8594977933C0EFD6 /* Pods-LoodosQuest.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90794F8F22DE1FA0001A8C5F /* Build configuration list for PBXNativeTarget "LoodosQuest" */;
 			buildPhases = (
+				2CCF65F30B1FB7227A8FD7A3 /* [CP] Check Pods Manifest.lock */,
 				90794F7922DE1F9F001A8C5F /* Sources */,
 				90794F7A22DE1F9F001A8C5F /* Frameworks */,
 				90794F7B22DE1F9F001A8C5F /* Resources */,
+				F710C868444D7AE0738A5749 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -123,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90794F8B22DE1FA0001A8C5F /* LaunchScreen.storyboard in Resources */,
+				90DCFC2F22DE59D6005A23EA /* GoogleService-Info.plist in Resources */,
 				90794F8822DE1FA0001A8C5F /* Assets.xcassets in Resources */,
 				90794F8622DE1F9F001A8C5F /* Main.storyboard in Resources */,
 			);
@@ -130,13 +190,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2CCF65F30B1FB7227A8FD7A3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LoodosQuest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F710C868444D7AE0738A5749 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		90794F7922DE1F9F001A8C5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90794F8322DE1F9F001A8C5F /* ViewController.swift in Sources */,
+				908F72BB22DF167B0065FADF /* RCFetcher.swift in Sources */,
+				90794F8322DE1F9F001A8C5F /* SplashViewController.swift in Sources */,
 				90794F8122DE1F9F001A8C5F /* AppDelegate.swift in Sources */,
+				908F72BD22DF253D0065FADF /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,11 +384,12 @@
 		};
 		90794F9022DE1FA0001A8C5F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C68411CB0786A872F90BDB0D /* Pods-LoodosQuest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77H998AFPB;
-				INFOPLIST_FILE = LoodosQuest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LoodosQuest/Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,11 +403,12 @@
 		};
 		90794F9122DE1FA0001A8C5F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F696E5E8594977933C0EFD6 /* Pods-LoodosQuest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77H998AFPB;
-				INFOPLIST_FILE = LoodosQuest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LoodosQuest/Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
