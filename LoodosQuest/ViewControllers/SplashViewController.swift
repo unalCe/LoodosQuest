@@ -9,16 +9,22 @@
 import UIKit
 import Network
 
+let homeSegueIdentifier = "homeSegue"
 
 class SplashViewController: UIViewController {
     // MARK: - Properties
-    private let networkMonitor = NWPathMonitor()
-    
+    @IBOutlet weak var splashTextLabel: UILabel!
     private var splashText: String? {
         didSet {
-            print(splashText!)
+            splashTextLabel.isHidden = false
+            splashTextLabel.text = splashText
+            
+            // Wait 3 seconds to perform segue after splash text has been set
+            self.perform(#selector(self.performHomeSegue), with: nil, afterDelay: 3)
         }
     }
+    
+    private let networkMonitor = NWPathMonitor()
 
     // MARK: - View Life Cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +35,7 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+    
     }
     
     // MARK: - Functions
@@ -62,10 +68,22 @@ class SplashViewController: UIViewController {
     private func fetchSplashTextFromRemoteConfig() {
         let rcFetcher = RCFetcher.rcFetcher
         
-        rcFetcher.fetchCompleteCallBack = {
-            self.splashText = rcFetcher.stringValue(for: .splash_text)
+        rcFetcher.fetchCompleteCallBack = { [weak self] in
+            // Fetch raw string from Remote Config
+            let rawString = rcFetcher.stringValue(for: .splash_text)
+            // Remove the " character from string
+            self?.splashText = rawString?.replacingOccurrences(of: "\"", with: "")
         }
     }
-
+    
+    @objc func performHomeSegue() {
+        performSegue(withIdentifier: homeSegueIdentifier, sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == homeSegueIdentifier {
+            // Navigation controller
+        }
+    }
 }
 

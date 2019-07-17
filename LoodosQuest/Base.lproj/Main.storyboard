@@ -17,9 +17,35 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlK-UY-P1n">
+                                <rect key="frame" x="93" y="312.5" width="189" height="42"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="placeholder">
+                                        <attributes>
+                                            <font key="NSFont" size="36" name="QuicksandBook-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabledForSubviews" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="zlK-UY-P1n" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JrG-Fw-gih"/>
+                            <constraint firstItem="zlK-UY-P1n" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tyq-cS-4M4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="splashTextLabel" destination="zlK-UY-P1n" id="tqn-eA-KMe"/>
+                        <segue destination="ZAD-9U-Q7D" kind="show" identifier="homeSegue" id="msA-ao-9Ht"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -32,14 +58,14 @@
                     <view key="view" contentMode="scaleToFill" id="jZq-ge-TlF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Qpc-Fv-Zf7"/>
                     </view>
                     <navigationItem key="navigationItem" id="HCR-Az-5FD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWb-cr-0Z0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010" y="27"/>
+            <point key="canvasLocation" x="1335" y="767"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zDU-60-YhL">
@@ -54,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAh-vQ-5zQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3127" y="27"/>
+            <point key="canvasLocation" x="2452" y="767"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f7M-dz-eEU">
@@ -72,7 +98,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JL8-Mu-Vmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2009" y="-693"/>
+            <point key="canvasLocation" x="1334" y="27"/>
         </scene>
     </scenes>
 </document>

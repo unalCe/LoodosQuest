@@ -39,7 +39,11 @@ class RCFetcher {
             
             // Apply fetched config data and update behavior with callback function
             RemoteConfig.remoteConfig().activate(completionHandler: { (error) in
-                self?.fetchCompleteCallBack?()
+                
+                // This completion handler needs to update UI so do it on main thread.
+                DispatchQueue.main.async {
+                    self?.fetchCompleteCallBack?()
+                }
             })
         }
     }
