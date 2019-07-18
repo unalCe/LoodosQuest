@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+var apiKey: String?
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

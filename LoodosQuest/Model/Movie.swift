@@ -10,24 +10,40 @@ import Foundation
 
 struct Movie: Codable {
     var title: String
-    var year: String
-    var rated: String
-    var released: Date
-    var runtime: TimeInterval
-    var genre: String
-    var director: String
-    var writer: String
-    var actors: String
-    var plot: String
-    var language: String
-    var awards: String
-    var poster: URL
-    var metaScore: Double
-    var imdbRating: Double
-    var imdbVotes: Int
+    var year: String?
+    var rated: String?
+    var released: String?
+    var runtime: String?
+    var genre: String?
+    var plot: String?
+    var poster: URL?
+    var ratings: [[String: String]]?
+    var metaScore: String?
+    var imdbRating: String?
     var imdbID: String
-    var type: String
-    var production: String
-    var website: URL
-    var response: Bool
+    var type: String?
+    var response: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "Title"
+        case year = "Year"
+        case rated = "Rated"
+        case released = "Released"
+        case runtime = "Runtime"
+        case genre = "Genre"
+        case plot = "Plot"
+        case poster = "Poster"
+        case ratings = "Ratings"
+        case metaScore = "Metascore"
+        case imdbRating
+        case imdbID
+        case type = "Type"
+        case response = "Response"
+    }
+}
+
+struct SearchMovie: Codable {
+    var Search: [Movie]
+    var totalResults: String
+    var Response: String
 }

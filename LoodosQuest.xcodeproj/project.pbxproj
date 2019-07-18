@@ -16,6 +16,8 @@
 		908F72BB22DF167B0065FADF /* RCFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72BA22DF167B0065FADF /* RCFetcher.swift */; };
 		908F72BD22DF253D0065FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72BC22DF253D0065FADF /* HomeViewController.swift */; };
 		908F72C022DFA7F60065FADF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72BF22DFA7F60065FADF /* Movie.swift */; };
+		908F72C222E0652C0065FADF /* MovieDBFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72C122E0652C0065FADF /* MovieDBFetcher.swift */; };
+		908F72C422E090C20065FADF /* APIParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72C322E090C20065FADF /* APIParameters.swift */; };
 		90DCFC2F22DE59D6005A23EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		908F72BA22DF167B0065FADF /* RCFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCFetcher.swift; sourceTree = "<group>"; };
 		908F72BC22DF253D0065FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		908F72BF22DFA7F60065FADF /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		908F72C122E0652C0065FADF /* MovieDBFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBFetcher.swift; sourceTree = "<group>"; };
+		908F72C322E090C20065FADF /* APIParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParameters.swift; sourceTree = "<group>"; };
 		90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C68411CB0786A872F90BDB0D /* Pods-LoodosQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoodosQuest.debug.xcconfig"; path = "Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				908F72BA22DF167B0065FADF /* RCFetcher.swift */,
+				908F72C122E0652C0065FADF /* MovieDBFetcher.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -106,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				90794F8022DE1F9F001A8C5F /* AppDelegate.swift */,
+				908F72C322E090C20065FADF /* APIParameters.swift */,
 				90794F8722DE1FA0001A8C5F /* Assets.xcassets */,
 				90794F8922DE1FA0001A8C5F /* LaunchScreen.storyboard */,
 				90794F8C22DE1FA0001A8C5F /* Info.plist */,
@@ -249,9 +255,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				908F72BB22DF167B0065FADF /* RCFetcher.swift in Sources */,
+				908F72C422E090C20065FADF /* APIParameters.swift in Sources */,
 				90794F8322DE1F9F001A8C5F /* SplashViewController.swift in Sources */,
 				90794F8122DE1F9F001A8C5F /* AppDelegate.swift in Sources */,
 				908F72BD22DF253D0065FADF /* HomeViewController.swift in Sources */,
+				908F72C222E0652C0065FADF /* MovieDBFetcher.swift in Sources */,
 				908F72C022DFA7F60065FADF /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

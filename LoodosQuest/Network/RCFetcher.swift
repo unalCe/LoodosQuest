@@ -10,7 +10,8 @@ import Foundation
 import Firebase
 
 enum RemoteConfigKeyValues: String {
-    case splash_text
+    case splashText = "splash_text"
+    case apiKey = "omdb_api_key"
 }
 
 class RCFetcher {

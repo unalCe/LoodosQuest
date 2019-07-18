@@ -24,7 +24,7 @@ class SplashViewController: UIViewController {
                 self.splashTextLabel.isHidden = false
                 self.splashTextLabel.alpha = 1.0
             }) { (completed) in
-                if completed {
+                if completed && self.connectedToInternet {
                     // Wait 3 seconds to perform segue after splash text has been set
                     self.perform(#selector(self.performHomeSegue), with: nil, afterDelay: 3)
                 }
@@ -33,6 +33,7 @@ class SplashViewController: UIViewController {
     }
     
     private let networkMonitor = NWPathMonitor()
+    private var connectedToInternet = false
 
     // MARK: - View Life Cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -62,8 +63,9 @@ class SplashViewController: UIViewController {
                                               handler: nil))
                 
                 self?.present(alert, animated: true, completion: nil)
+                self?.connectedToInternet = false
             } else {
-                print("there are internet connection")
+                self?.connectedToInternet = true
             }
         }
         
@@ -76,10 +78,13 @@ class SplashViewController: UIViewController {
     private func fetchSplashTextFromRemoteConfig() {
         RCFetcher.rcFetcher.fetchCompleteCallBack = { [weak self] in
             // Fetch raw string from Remote Config
-            let rawString = RCFetcher.rcFetcher.stringValue(for: .splash_text)
+            let rawString = RCFetcher.rcFetcher.stringValue(for: .splashText)
             
             // Remove the " character from string
             self?.splashText = rawString?.replacingOccurrences(of: "\"", with: "")
+            
+            // Set API Key from Remote Config for safety
+            apiKey = RCFetcher.rcFetcher.stringValue(for: .apiKey)
         }
     }
     
