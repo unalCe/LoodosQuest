@@ -18,6 +18,7 @@
 		908F72C022DFA7F60065FADF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72BF22DFA7F60065FADF /* Movie.swift */; };
 		908F72C222E0652C0065FADF /* MovieDBFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72C122E0652C0065FADF /* MovieDBFetcher.swift */; };
 		908F72C422E090C20065FADF /* APIParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72C322E090C20065FADF /* APIParameters.swift */; };
+		908F72C722E0DFD80065FADF /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F72C622E0DFD80065FADF /* FeedTableViewCell.swift */; };
 		90DCFC2F22DE59D6005A23EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		908F72BF22DFA7F60065FADF /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		908F72C122E0652C0065FADF /* MovieDBFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBFetcher.swift; sourceTree = "<group>"; };
 		908F72C322E090C20065FADF /* APIParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParameters.swift; sourceTree = "<group>"; };
+		908F72C622E0DFD80065FADF /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		90DCFC2E22DE59D6005A23EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C68411CB0786A872F90BDB0D /* Pods-LoodosQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoodosQuest.debug.xcconfig"; path = "Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 		90794F7F22DE1F9F001A8C5F /* LoodosQuest */ = {
 			isa = PBXGroup;
 			children = (
+				908F72C522E0DFC60065FADF /* View */,
 				908F72BE22DFA7E40065FADF /* Model */,
 				908F72B722DF15740065FADF /* Network */,
 				90DCFC2D22DE43C5005A23EA /* ViewControllers */,
@@ -105,6 +108,14 @@
 				908F72BF22DFA7F60065FADF /* Movie.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		908F72C522E0DFC60065FADF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				908F72C622E0DFD80065FADF /* FeedTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		90DCFC2C22DE43B1005A23EA /* Helper */ = {
@@ -255,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				908F72BB22DF167B0065FADF /* RCFetcher.swift in Sources */,
+				908F72C722E0DFD80065FADF /* FeedTableViewCell.swift in Sources */,
 				908F72C422E090C20065FADF /* APIParameters.swift in Sources */,
 				90794F8322DE1F9F001A8C5F /* SplashViewController.swift in Sources */,
 				90794F8122DE1F9F001A8C5F /* AppDelegate.swift in Sources */,

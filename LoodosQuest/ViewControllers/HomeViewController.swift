@@ -15,11 +15,13 @@ import UIKit
 
 
 
-class HomeViewController: UITableViewController {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - Properties
+    @IBOutlet var homeTableView: UITableView!
     let movieDBFetcherService = MovieDBFetcher()
     
+    var movie: Movie?
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -29,12 +31,38 @@ class HomeViewController: UITableViewController {
         let newURL = apiParameters.bringFullURL(for: .movie, plotType: .short)
         
         movieDBFetcherService.fetch(newURL, by: apiParameters.fetchType!) { (movies, err) in
-            print(movies ?? "boş geldi")
+            
+            // TODO: - Replace single movie with an array.
+            DispatchQueue.main.async {
+                self.movie = movies?.first
+                self.homeTableView.reloadData()
+            }
         }
         
         // Do any additional setup after loading the view.
+        homeTableView.delegate = self
+        homeTableView.dataSource = self
+        homeTableView.estimatedRowHeight = 360
+        homeTableView.rowHeight = UITableView.automaticDimension
+        
     }
     
+    // MARK: - TableView Data Source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
+        cell.movieImageView.backgroundColor = .orange
+        cell.movieNameLabel.text = movie?.title
+        cell.movieDescriptionLabel.text = movie?.plot
+        cell.movieGenreLabel.text = "Genre: " + (movie?.genre ?? "")
+        cell.imdbScoreLabel.text = "IMDB Score: " + (movie?.imdbRating ?? "")
+        // cell.movieDescriptionLabel.text = "işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... "
+        return cell
+    }
 
     /*
     // MARK: - Navigation

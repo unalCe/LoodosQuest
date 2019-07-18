@@ -14,9 +14,17 @@ class MovieDBFetcher {
     // Completion handler type for web service response.
     typealias ServiceResponse = ([Movie]?, Error?) -> Void
     
+    // Data request object to cancel any old tasks.
+    private var dataRequest: DataRequest? {
+        didSet {
+            oldValue?.cancel()
+        }
+    }
+    
     // Send request for a given URL
     func fetch(_ url: URL, by fetchType: APIParameters.FetchType, completion: @escaping ServiceResponse) {
-        Alamofire.request(url).responseJSON { (response) in
+        // Set the data request so the old task will be stopped.
+        dataRequest = Alamofire.request(url).responseJSON { (response) in
             if let error = response.error {
                 // Request error occured. No data passed into completion handler
                 completion(nil, error)
