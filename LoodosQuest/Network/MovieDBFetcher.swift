@@ -9,6 +9,11 @@
 import Foundation
 import Alamofire
 
+//enum NetworkError: Error {
+//    case responseError
+//    case decodingError
+//}
+
 class MovieDBFetcher {
     
     // Completion handler type for web service response.
@@ -21,20 +26,27 @@ class MovieDBFetcher {
         }
     }
     
-    // Send request for a given URL
-    func fetch(_ url: URL, by fetchType: APIParameters.FetchType, completion: @escaping ServiceResponse) {
+/**
+     Send request for a given URL and fetch data
+     
+     - parameter url: URL to request
+     - parameter fetchType: Search multiple movies or fetch one by title/id
+     - parameter completion: ServiceResponse method to use fetched data
+ */
+    func fetch(_ url: URL, by fetchType: APIParameters.FetchType = .search, completion: @escaping ServiceResponse) {
+        
+        print(url)
+        
         // Set the data request so the old task will be stopped.
         dataRequest = Alamofire.request(url).responseJSON { (response) in
-            if let error = response.error {
+            if response.error != nil {
                 // Request error occured. No data passed into completion handler
-                completion(nil, error)
+                completion(nil, response.error)
             } else if let data = response.data {
                 
                 // Create a decoder object & movies array.
                 let decoder = JSONDecoder()
                 var decodedMovies = [Movie]()
-                
-                print(url)
                 
                 do {
                     // Switch decoding style depending on the fetch type.
@@ -52,11 +64,12 @@ class MovieDBFetcher {
                     // Completion handler.
                     completion(decodedMovies, nil)
                 } catch let jsonErr {
-                    // use only for debugging
-                    fatalError("Error occured while decoding data --> \(jsonErr)")
+                    // Send error to completion.
+                    completion(nil, jsonErr)
                 }
             }
         }
     }
+    
     
 }

@@ -14,56 +14,99 @@ import UIKit
 // tt0222012
 
 
-
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     // MARK: - Properties
     @IBOutlet var homeTableView: UITableView!
     let movieDBFetcherService = MovieDBFetcher()
     
-    var movie: Movie?
+    var movies: [Movie]?
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let apiParameters = APIParameters(apiKey: apiKey!, fetchType: .title, title: "Fast ", id: nil)
-        let newURL = apiParameters.bringFullURL(for: .movie, plotType: .short)
+        
+        setup(customTableView: homeTableView)
+        setupSearchController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchMovie(by: .search, withTitle: "Godfather", withID: nil)
+    }
+    
+/**
+     Fetch movie data by searching for a given title or id
+ 
+     - parameter fetchType: Search for movies or bring only one for a title
+     - parameter title: Title that will be searched
+     - parameter id: Movie ID that will be searched
+     - parameter resultType: Movie, Series or Episode
+     - parameter plotType: Short or full plot
+ */
+    private func fetchMovie(by fetchType: APIParameters.FetchType, withTitle title: String?, withID id: String?, in resultType: APIParameters.ResultType = .movie, with plotType: APIParameters.PlotType = .short) {
+        
+        var apiParameters = APIParameters(apiKey: apiKey!, fetchType: fetchType, title: title, id: id)
+        let newURL = apiParameters.bringFullURL(for: resultType, plotType: plotType)
         
         movieDBFetcherService.fetch(newURL, by: apiParameters.fetchType!) { (movies, err) in
-            
-            // TODO: - Replace single movie with an array.
+        
             DispatchQueue.main.async {
-                self.movie = movies?.first
+                self.movies = movies
                 self.homeTableView.reloadData()
             }
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        fetchMovie(by: .search, withTitle: searchText, withID: searchText)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // Setup Custom Table View
+    func setup(customTableView: UITableView) {
+        customTableView.delegate = self
+        customTableView.dataSource = self
+        customTableView.estimatedRowHeight = 360
+        customTableView.rowHeight = UITableView.automaticDimension
+        customTableView.tableFooterView = UIView()
+    }
+    
+    // Setup Search Controller
+    func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search Movies"
         
-        // Do any additional setup after loading the view.
-        homeTableView.delegate = self
-        homeTableView.dataSource = self
-        homeTableView.estimatedRowHeight = 360
-        homeTableView.rowHeight = UITableView.automaticDimension
-        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     // MARK: - TableView Data Source
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.movies?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
-        cell.movieImageView.backgroundColor = .orange
-        cell.movieNameLabel.text = movie?.title
-        cell.movieDescriptionLabel.text = movie?.plot
-        cell.movieGenreLabel.text = "Genre: " + (movie?.genre ?? "")
-        cell.imdbScoreLabel.text = "IMDB Score: " + (movie?.imdbRating ?? "")
-        // cell.movieDescriptionLabel.text = "işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... işte şimdi askldjaskldjalksd ulaa doldur doldur. \n aşağı da geçtim ooh artık yok öyle tek satır olayım falan... "
+        cell.movie = self.movies?[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
+        cell.imageRetrieveTask?.cancel()
+    }
 
+    // TODO: Try UITableViewDataSourcePrefetchingDelegate protocol
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
+    //        cell.movie = self.movies?[indexPath.row]
+    //    }
+    
     /*
     // MARK: - Navigation
 

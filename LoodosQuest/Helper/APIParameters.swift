@@ -46,7 +46,10 @@ struct APIParameters {
      - returns: Specified URL for given parameters
      */
     
-    func bringFullURL(for resultType: ResultType?, plotType: PlotType?) -> URL {
+    mutating func bringFullURL(for resultType: ResultType?, plotType: PlotType?) -> URL {
+        // Title and ID can't be searched at once.  Priority: Title
+        if title != nil { self.id = nil }
+        
         let baseWithAPIKey = baseURL + apiKey
         let withTypeParametersAdded = baseWithAPIKey + (resultType?.rawValue ?? "") + (plotType?.rawValue ?? "")
         let withSearchParametersAdded = withTypeParametersAdded + (fetchType?.rawValue ?? "") + (title ?? "") + (id ?? "")
@@ -63,8 +66,8 @@ struct APIParameters {
      */
     
     init(apiKey: String, fetchType: FetchType, title: String?, id: String?) {
-        // Lowercase the string and replace the blank spaces with API friendly "-"
-        let apiTitle = title?.lowercased().replacingOccurrences(of: " ", with: "-")
+        // Lowercase the string and replace the blank spaces with API friendly "-" and replace non-english letters
+        let apiTitle = title?.lowercased().replacingOccurrences(of: " ", with: "-").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         self.fetchType = fetchType
         self.apiKey = apiKey
