@@ -22,13 +22,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Fetch once for placeholder movies.
+        fetchMovie(by: .search, withTitle: "Godfather", withID: nil)
         
         setup(customTableView: homeTableView)
         setupSearchController()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        fetchMovie(by: .search, withTitle: "Godfather", withID: nil)
     }
     
 /**
@@ -52,8 +50,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 // Fetch detailedmovies for searched movies
                 self.movieDBFetcherService.fetchDetailedMovies(for: fetchedMovs!, plotType: .short, completion: { (movies, err) in
                     if err == nil, let detailedMovies = movies {
-                            self.movies = detailedMovies
-                            self.homeTableView.reloadData()
+                        self.movies = detailedMovies
+                        
+                        // Sort movies by imdbRatings
+                        self.movies.sort {
+                            guard let firstRating = $0.imdbRating, let secondRating = $1.imdbRating, let doubleFirstRating = Double(firstRating), let doubleSecondRating = Double(secondRating) else { return false }
+                            return doubleFirstRating > doubleSecondRating
+                        }
+                        
+                        self.homeTableView.reloadData()
                     } else {
                         // Debugging only.
                         print("Error while fetching detailed movies: " + err.debugDescription)
@@ -109,21 +114,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Stop image retrieve tasks for cells that are not being displayed anymore.
         cell.imageRetrieveTask?.cancel()
     }
-
+    
     // TODO: Try UITableViewDataSourcePrefetchingDelegate protocol
     //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     //        let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
     //        cell.movie = self.movies?[indexPath.row]
     //    }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail", let dest = segue.destination as? MovieDetailViewController, let cellIndex = homeTableView.indexPathForSelectedRow {
+            dest.movie = movies[cellIndex.row]
+        }
     }
-    */
-
 }

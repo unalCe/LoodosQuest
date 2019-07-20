@@ -23,6 +23,8 @@ struct Movie: Codable {
     var imdbID: String
     var type: String?
     var response: String?
+    var actors: String?
+    var language: String?
     
     enum CodingKeys: String, CodingKey {
         case title = "Title"
@@ -39,6 +41,8 @@ struct Movie: Codable {
         case imdbID
         case type = "Type"
         case response = "Response"
+        case actors = "Actors"
+        case language = "Language"
     }
 }
 

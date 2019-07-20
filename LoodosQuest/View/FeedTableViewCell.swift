@@ -13,13 +13,9 @@ class FeedTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     @IBOutlet weak var movieImageView: UIImageView!
-    
     @IBOutlet weak var movieNameLabel: UILabel!
-    
     @IBOutlet weak var imdbScoreLabel: UILabel!
-    
     @IBOutlet weak var movieGenreLabel: UILabel!
-    
     @IBOutlet weak var movieDescriptionLabel: UILabel!
     
     // Kingfisher RetrieveImageTask that will be used for cancelling download task in viewController.
@@ -68,13 +64,4 @@ class FeedTableViewCell: UITableViewCell {
         movieImageView.clipsToBounds = true
         movieImageView.contentMode = .scaleAspectFill
     }
-
-    
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
