@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var homeTableView: UITableView!
     let movieDBFetcherService = MovieDBFetcher()
     
-    var movies: [Movie]?
+    var movies = [Movie]()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -47,11 +47,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let apiParameters = APIParameters(apiKey: apiKey!, fetchType: fetchType, title: title, id: id, resultType: resultType, plotType: plotType)
         
         movieDBFetcherService.fetch(with: apiParameters) { (fetchedMovs, err) in
-        
-            DispatchQueue.main.async {
-                self.movies = fetchedMovs
-                self.homeTableView.reloadData()
-            }
+            
+            if fetchedMovs != nil, err == nil {
+                
+                // OMDB API doesn't return detailed results when searching multiple results by text.
+                // Fetch detailedmovies for searched movies
+                self.movieDBFetcherService.fetchDetailedMovies(for: fetchedMovs!, plotType: .short, completion: { (movies, err) in
+                    if err == nil, let detailedMovies = movies {
+                            self.movies = detailedMovies
+                            self.homeTableView.reloadData()
+                    } else {
+                        // Debugging only.
+                        print("Error while fetching detailed movies: " + err.debugDescription)
+                    }
+                })
+            } else { print("Error while fetching searched movies: " + err.debugDescription) }
         }
     }
     
@@ -85,19 +95,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movies?.count ?? 0
+        return self.movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
-        
-        // !! The omdb API doesn't returns detailed information when searching multiple results by text. Fetch again by movieID for plot and genre details. The proper way to do this in MovieDBFetcher
-        MovieDBFetcher.movieFetcher.fetchSingleMovie(withID: movies![indexPath.row].imdbID, plotType: .short, completion: { (fetchedMov, error) in
-            if error == nil {
-                cell.movie = fetchedMov
-            }
-        })
   
+        cell.movie = movies[indexPath.row]
+        
         return cell
     }
     

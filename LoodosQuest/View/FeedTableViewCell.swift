@@ -31,10 +31,10 @@ class FeedTableViewCell: UITableViewCell {
     var imageRetrieveTask: RetrieveImageTask?
     
     func fillLabelsWithMovieInformation() {
-        movieGenreLabel.text = "Genre: " + (movie?.genre ?? "Unknown")
+        movieGenreLabel.text = "Genre: " + ((movie?.genre == "N/A") ? "Unknown" : (movie?.genre)!)
         movieNameLabel.text = movie?.title
-        movieDescriptionLabel.text = movie?.plot
-        imdbScoreLabel.text = "imDB Rating: " + (movie?.imdbRating ?? "Unknown")
+        movieDescriptionLabel.text = (movie?.plot == "N/A") ? "No description available" : movie?.plot
+        imdbScoreLabel.text = "imDB Rating: " + ((movie?.imdbRating == "N/A") ? "Unknown" : (movie?.imdbRating)!)
     }
     
     private func fetchImage(from url: URL?, to imageView: UIImageView) {

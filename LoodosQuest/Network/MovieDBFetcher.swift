@@ -17,6 +17,8 @@ class MovieDBFetcher {
     typealias SearchServiceResponse = ([Movie]?, Error?) -> Void
     typealias SingleMovieServiceResponse = (Movie? , Error?) -> Void
     
+    let dispatchGroup = DispatchGroup()
+    
     // Data request object to cancel any old tasks.
     private var dataRequest: DataRequest? {
         didSet {
@@ -34,8 +36,8 @@ class MovieDBFetcher {
     func fetch(with apiParameters : APIParameters, completion: @escaping SearchServiceResponse) {
         
         let url = apiParameters.bringFullURL()
-        
-        print(url)
+
+        dispatchGroup.enter()
         
         // Set the data request so the old task will be stopped.
         dataRequest = Alamofire.request(url).responseJSON { (response) in
@@ -69,17 +71,44 @@ class MovieDBFetcher {
                     completion(nil, jsonErr)
                 }
             }
+            self.dispatchGroup.leave()
         }
     }
     
     
-    
-    func fetchSingleMovie(withID: String, plotType: PlotType, completion: @escaping SingleMovieServiceResponse) {
-        let apiParameters = APIParameters(apiKey: apiKey!, fetchType: .id, title: nil, id: withID, resultType: .movie, plotType: plotType)
+    func fetchDetailedMovies(for movies: [Movie], plotType: PlotType, completion: @escaping SearchServiceResponse) {
+        var detailedMovies = [Movie]()
+        var err: Error?
         
-        fetch(with: apiParameters) { (movs, err) in
-            if err != nil { completion(nil, err) }
-            else { completion(movs?.first, nil) }
+        var apiParameters = APIParameters(apiKey: apiKey!, fetchType: .id, title: nil, id: nil, resultType: .movie, plotType: plotType)
+        
+        dispatchGroup.enter()
+        for movIndex in movies.indices {
+            apiParameters.id = movies[movIndex].imdbID
+            
+            let url = apiParameters.bringFullURL()
+
+            Alamofire.request(url).response(completionHandler: { (response) in
+                if response.error == nil, let data = response.data {
+                    do {
+                        let decodedMovie = try JSONDecoder().decode(Movie.self, from: data)
+                        detailedMovies.append(decodedMovie)
+                    } catch {
+                        err = error
+                    }
+                } else {
+                    err = response.error
+                }
+                
+                if movIndex == movies.count - 1 {
+                    self.dispatchGroup.leave()
+                }
+            })
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            print(detailedMovies)
+            completion(detailedMovies, err)
         }
     }
 }
