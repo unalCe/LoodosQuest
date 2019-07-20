@@ -60,6 +60,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.1446645644" green="0.39271744089999999" blue="0.42896939070000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="360" id="JVe-GT-DP9" customClass="FeedTableViewCell" customModule="LoodosQuest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="360"/>
@@ -82,16 +83,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4LL-ao-F8h">
-                                                    <rect key="frame" x="235" y="127.5" width="159" height="53"/>
+                                                    <rect key="frame" x="247" y="83.5" width="147" height="53"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre: Horror" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7W-kE-xsI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="159" height="22.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre: Horror" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7W-kE-xsI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="22.5"/>
                                                             <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMDB Score: x.x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd2-k4-Nqb">
-                                                            <rect key="frame" x="0.0" y="30.5" width="159" height="22.5"/>
+                                                            <rect key="frame" x="0.0" y="30.5" width="147" height="22.5"/>
                                                             <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -110,15 +111,14 @@
                                                 <constraint firstItem="fY5-SU-rSf" firstAttribute="trailing" secondItem="arm-K1-ZTj" secondAttribute="trailingMargin" id="71K-3d-gW0"/>
                                                 <constraint firstItem="cln-FE-Dlw" firstAttribute="trailing" secondItem="arm-K1-ZTj" secondAttribute="trailingMargin" id="EqC-my-5Sj"/>
                                                 <constraint firstItem="nsq-Px-pXS" firstAttribute="top" secondItem="arm-K1-ZTj" secondAttribute="top" constant="16" id="Fit-Ao-arD"/>
-                                                <constraint firstItem="4LL-ao-F8h" firstAttribute="centerY" secondItem="nsq-Px-pXS" secondAttribute="centerY" priority="750" id="HpP-CU-VXG"/>
                                                 <constraint firstItem="fY5-SU-rSf" firstAttribute="leading" secondItem="nsq-Px-pXS" secondAttribute="trailing" constant="8" id="I3B-jj-ke5"/>
-                                                <constraint firstItem="4LL-ao-F8h" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fY5-SU-rSf" secondAttribute="bottom" constant="20" id="Jwf-es-sk6"/>
+                                                <constraint firstItem="4LL-ao-F8h" firstAttribute="top" secondItem="fY5-SU-rSf" secondAttribute="bottom" constant="20" id="Jwf-es-sk6"/>
                                                 <constraint firstItem="cln-FE-Dlw" firstAttribute="top" secondItem="nsq-Px-pXS" secondAttribute="bottom" constant="16" id="UzR-w6-wlu"/>
                                                 <constraint firstItem="4LL-ao-F8h" firstAttribute="trailing" secondItem="arm-K1-ZTj" secondAttribute="trailingMargin" id="WMW-n6-JR5"/>
                                                 <constraint firstItem="cln-FE-Dlw" firstAttribute="leading" secondItem="arm-K1-ZTj" secondAttribute="leadingMargin" id="Wme-wn-SfM"/>
                                                 <constraint firstItem="nsq-Px-pXS" firstAttribute="leading" secondItem="arm-K1-ZTj" secondAttribute="leading" constant="20" id="a2X-DG-Hb4"/>
                                                 <constraint firstItem="nsq-Px-pXS" firstAttribute="top" secondItem="fY5-SU-rSf" secondAttribute="top" constant="-20" id="gix-76-et6"/>
-                                                <constraint firstItem="4LL-ao-F8h" firstAttribute="leading" secondItem="nsq-Px-pXS" secondAttribute="trailing" constant="8" id="hVi-xv-2kz"/>
+                                                <constraint firstItem="4LL-ao-F8h" firstAttribute="leading" secondItem="nsq-Px-pXS" secondAttribute="trailing" constant="20" id="hVi-xv-2kz"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="cln-FE-Dlw" secondAttribute="bottom" constant="12" id="jrg-qF-yhC"/>
                                                 <constraint firstAttribute="centerX" secondItem="nsq-Px-pXS" secondAttribute="trailing" constant="-20" id="zCs-F5-FTu"/>
                                             </constraints>

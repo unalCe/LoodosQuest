@@ -13,7 +13,6 @@ import UIKit
 // let url = URL(string: "http://www.omdbapi.com/?apikey=3639a762&type=movie&r=json&y=2019&s=the*&page=1")!
 // tt0222012
 
-
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     // MARK: - Properties
@@ -43,15 +42,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter resultType: Movie, Series or Episode
      - parameter plotType: Short or full plot
  */
-    private func fetchMovie(by fetchType: APIParameters.FetchType, withTitle title: String?, withID id: String?, in resultType: APIParameters.ResultType = .movie, with plotType: APIParameters.PlotType = .short) {
+    private func fetchMovie(by fetchType: FetchType, withTitle title: String?, withID id: String?, in resultType: ResultType = .movie, with plotType: PlotType = .short) {
         
-        var apiParameters = APIParameters(apiKey: apiKey!, fetchType: fetchType, title: title, id: id)
-        let newURL = apiParameters.bringFullURL(for: resultType, plotType: plotType)
+        let apiParameters = APIParameters(apiKey: apiKey!, fetchType: fetchType, title: title, id: id, resultType: resultType, plotType: plotType)
         
-        movieDBFetcherService.fetch(newURL, by: apiParameters.fetchType!) { (movies, err) in
+        movieDBFetcherService.fetch(with: apiParameters) { (fetchedMovs, err) in
         
             DispatchQueue.main.async {
-                self.movies = movies
+                self.movies = fetchedMovs
                 self.homeTableView.reloadData()
             }
         }
@@ -92,7 +90,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
-        cell.movie = self.movies?[indexPath.row]
+        
+        // !! The omdb API doesn't returns detailed information when searching multiple results by text. Fetch again by movieID for plot and genre details. The proper way to do this in MovieDBFetcher
+        MovieDBFetcher.movieFetcher.fetchSingleMovie(withID: movies![indexPath.row].imdbID, plotType: .short, completion: { (fetchedMov, error) in
+            if error == nil {
+                cell.movie = fetchedMov
+            }
+        })
+  
         return cell
     }
     

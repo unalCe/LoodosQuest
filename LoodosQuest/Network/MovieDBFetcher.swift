@@ -9,15 +9,13 @@
 import Foundation
 import Alamofire
 
-//enum NetworkError: Error {
-//    case responseError
-//    case decodingError
-//}
-
 class MovieDBFetcher {
     
+    static let movieFetcher = MovieDBFetcher()
+    
     // Completion handler type for web service response.
-    typealias ServiceResponse = ([Movie]?, Error?) -> Void
+    typealias SearchServiceResponse = ([Movie]?, Error?) -> Void
+    typealias SingleMovieServiceResponse = (Movie? , Error?) -> Void
     
     // Data request object to cancel any old tasks.
     private var dataRequest: DataRequest? {
@@ -27,13 +25,15 @@ class MovieDBFetcher {
     }
     
 /**
-     Send request for a given URL and fetch data
+     General fetch method. Send request for a given URL and fetch data
      
      - parameter url: URL to request
      - parameter fetchType: Search multiple movies or fetch one by title/id
      - parameter completion: ServiceResponse method to use fetched data
  */
-    func fetch(_ url: URL, by fetchType: APIParameters.FetchType = .search, completion: @escaping ServiceResponse) {
+    func fetch(with apiParameters : APIParameters, completion: @escaping SearchServiceResponse) {
+        
+        let url = apiParameters.bringFullURL()
         
         print(url)
         
@@ -50,7 +50,7 @@ class MovieDBFetcher {
                 
                 do {
                     // Switch decoding style depending on the fetch type.
-                    switch fetchType {
+                    switch apiParameters.fetchType! {
                     case .search:
                         // Decode data into SearchMovie object which also contains a Movie array.
                         let decodedMovie = try decoder.decode(SearchMovie.self, from: data)
@@ -63,6 +63,7 @@ class MovieDBFetcher {
                     
                     // Completion handler.
                     completion(decodedMovies, nil)
+
                 } catch let jsonErr {
                     // Send error to completion.
                     completion(nil, jsonErr)
@@ -72,4 +73,13 @@ class MovieDBFetcher {
     }
     
     
+    
+    func fetchSingleMovie(withID: String, plotType: PlotType, completion: @escaping SingleMovieServiceResponse) {
+        let apiParameters = APIParameters(apiKey: apiKey!, fetchType: .id, title: nil, id: withID, resultType: .movie, plotType: plotType)
+        
+        fetch(with: apiParameters) { (movs, err) in
+            if err != nil { completion(nil, err) }
+            else { completion(movs?.first, nil) }
+        }
+    }
 }

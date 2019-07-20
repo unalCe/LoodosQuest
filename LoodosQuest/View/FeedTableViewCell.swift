@@ -21,28 +21,26 @@ class FeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieDescriptionLabel: UILabel!
     
-    
     var movie: Movie? {
         didSet {
-            fetchImage(from: (movie?.poster)!, to: movieImageView)
-            reloadCellLabels()
+            fetchImage(from: movie?.poster, to: movieImageView)
+            fillLabelsWithMovieInformation()
         }
     }
     
     var imageRetrieveTask: RetrieveImageTask?
     
-    func reloadCellLabels() {
-        movieGenreLabel.text = movie?.genre
+    func fillLabelsWithMovieInformation() {
+        movieGenreLabel.text = "Genre: " + (movie?.genre ?? "Unknown")
         movieNameLabel.text = movie?.title
-        movieDescriptionLabel.text = "Ben deneme bir text'im hatta biraz da uzun bir textim. bakalım aşağı satıra inince ne olacak... rowheight sabitledik anlaşılan resim küçülecek mq bunu nasıl düşünemedim."
-        imdbScoreLabel.text = movie?.imdbRating
+        movieDescriptionLabel.text = movie?.plot
+        imdbScoreLabel.text = "imDB Rating: " + (movie?.imdbRating ?? "Unknown")
     }
     
-    private func fetchImage(from url: URL, to imageView: UIImageView) {
+    private func fetchImage(from url: URL?, to imageView: UIImageView) {
         // Start download indicator.
         imageView.kf.indicatorType = .activity
         // Retrieve the image with Kingfisher.
-    //    imageView.kf.setImage(with: url)
         imageRetrieveTask = imageView.kf.setImage(
             with: url,
             options: [
@@ -55,7 +53,6 @@ class FeedTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
         movieImageView.layer.cornerRadius = 12
         movieImageView.clipsToBounds = true
         movieImageView.contentMode = .scaleAspectFill

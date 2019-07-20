@@ -8,6 +8,23 @@
 
 import Foundation
 
+enum FetchType: String {
+    case title = "&t="
+    case id = "&i="
+    case search = "&s="
+}
+
+enum ResultType: String {
+    case movie = "&type=movie"
+    case series = "&type=series"
+    case episode = "&type=episode"
+}
+
+enum PlotType: String {
+    case short = "&plot=short"
+    case full = "&plot=full"
+}
+
 // Structure for handling API call parameters.
 struct APIParameters {
     let baseURL = "http://www.omdbapi.com/?&apikey="
@@ -20,22 +37,9 @@ struct APIParameters {
     // Fetching with title,id or searching
     var fetchType: FetchType?
     
-    enum FetchType: String {
-        case title = "&t="
-        case id = "&i="
-        case search = "&s="
-    }
+    var resultType: ResultType?
     
-    enum ResultType: String {
-        case movie = "&type=movie"
-        case series = "&type=series"
-        case episode = "&type=episode"
-    }
-    
-    enum PlotType: String {
-        case short = "&plot=short"
-        case full = "&plot=full"
-    }
+    var plotType: PlotType?
     
     /**
      Returns full URL depending on the input parameters
@@ -46,10 +50,7 @@ struct APIParameters {
      - returns: Specified URL for given parameters
      */
     
-    mutating func bringFullURL(for resultType: ResultType?, plotType: PlotType?) -> URL {
-        // Title and ID can't be searched at once.  Priority: Title
-        if title != nil { self.id = nil }
-        
+    func bringFullURL() -> URL {
         let baseWithAPIKey = baseURL + apiKey
         let withTypeParametersAdded = baseWithAPIKey + (resultType?.rawValue ?? "") + (plotType?.rawValue ?? "")
         let withSearchParametersAdded = withTypeParametersAdded + (fetchType?.rawValue ?? "") + (title ?? "") + (id ?? "")
@@ -65,7 +66,7 @@ struct APIParameters {
      - parameter id: Movie id to be searched.
      */
     
-    init(apiKey: String, fetchType: FetchType, title: String?, id: String?) {
+    init(apiKey: String, fetchType: FetchType, title: String?, id: String?, resultType: ResultType, plotType: PlotType) {
         // Lowercase the string and replace the blank spaces with API friendly "-" and replace non-english letters
         let apiTitle = title?.lowercased().replacingOccurrences(of: " ", with: "-").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
@@ -73,5 +74,9 @@ struct APIParameters {
         self.apiKey = apiKey
         self.title = apiTitle
         self.id = id
+        
+        
+        // Title and ID can't be searched at once.  Priority: Title
+        if title != nil { self.id = nil }
     }
 }
