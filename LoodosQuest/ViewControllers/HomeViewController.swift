@@ -8,17 +8,15 @@
 
 import UIKit
 
-
-// let url = URL(string: "http://www.omdbapi.com/?i=tt3896198&apikey=3639a762")!
-// let url = URL(string: "http://www.omdbapi.com/?apikey=3639a762&type=movie&r=json&y=2019&s=the*&page=1")!
-// tt0222012
-
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     // MARK: - Properties
     @IBOutlet var homeTableView: UITableView!
+    
+    // MovieDBFetcher object to handle networking with Alamofire.
     let movieDBFetcherService = MovieDBFetcher()
     
+    // Movie array that will be shown
     var movies = [Movie]()
     
     // MARK: - View Life Cycle
@@ -65,14 +63,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        fetchMovie(by: .search, withTitle: searchText, withID: searchText)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
+    // MARK: - Customizations
     // Setup Custom Table View
     func setup(customTableView: UITableView) {
         customTableView.delegate = self
@@ -93,6 +84,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    // MARK: - SearchBar Delegate Methods
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        fetchMovie(by: .search, withTitle: searchText, withID: searchText)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
     // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.movies.count
@@ -100,14 +100,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
-  
         cell.movie = movies[indexPath.row]
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
+        // Stop image retrieve tasks for cells that are not being displayed anymore.
         cell.imageRetrieveTask?.cancel()
     }
 

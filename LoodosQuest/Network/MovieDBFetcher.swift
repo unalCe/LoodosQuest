@@ -11,12 +11,10 @@ import Alamofire
 
 class MovieDBFetcher {
     
-    static let movieFetcher = MovieDBFetcher()
-    
     // Completion handler type for web service response.
     typealias SearchServiceResponse = ([Movie]?, Error?) -> Void
-    typealias SingleMovieServiceResponse = (Movie? , Error?) -> Void
     
+    // A DispatchGroup to control fetching threads.
     let dispatchGroup = DispatchGroup()
     
     // Data request object to cancel any old tasks.
@@ -31,12 +29,13 @@ class MovieDBFetcher {
      
      - parameter url: URL to request
      - parameter fetchType: Search multiple movies or fetch one by title/id
-     - parameter completion: ServiceResponse method to use fetched data
+     - parameter completion: SearchServiceResponse method to use fetched data
  */
     func fetch(with apiParameters : APIParameters, completion: @escaping SearchServiceResponse) {
         
         let url = apiParameters.bringFullURL()
 
+        // Enter Dispatch
         dispatchGroup.enter()
         
         // Set the data request so the old task will be stopped.
@@ -71,21 +70,32 @@ class MovieDBFetcher {
                     completion(nil, jsonErr)
                 }
             }
+            // Leave DispatchGroup when Alamofire request ends.
             self.dispatchGroup.leave()
         }
     }
-    
-    
+  
+    /**
+     Fetch all details about given movies
+     
+     - parameter movies: Movies that more details needed
+     - parameter plotType: Short or long plot type
+     - parameter completion: SearchServiceResponse method to use fetched data
+     */
     func fetchDetailedMovies(for movies: [Movie], plotType: PlotType, completion: @escaping SearchServiceResponse) {
+        // Create a Movie array and an Error object that will be filled while fetching and will be sent in completion handler
         var detailedMovies = [Movie]()
-        var err: Error?
+        var fetchError: Error?
         
         var apiParameters = APIParameters(apiKey: apiKey!, fetchType: .id, title: nil, id: nil, resultType: .movie, plotType: plotType)
         
+        // Enter DispatchGroup again.
         dispatchGroup.enter()
         for movIndex in movies.indices {
+            // Change API parameters for a specific movie ID
             apiParameters.id = movies[movIndex].imdbID
             
+            // Bring an URL for that id
             let url = apiParameters.bringFullURL()
 
             Alamofire.request(url).response(completionHandler: { (response) in
@@ -94,21 +104,22 @@ class MovieDBFetcher {
                         let decodedMovie = try JSONDecoder().decode(Movie.self, from: data)
                         detailedMovies.append(decodedMovie)
                     } catch {
-                        err = error
+                        fetchError = error
                     }
                 } else {
-                    err = response.error
+                    fetchError = response.error
                 }
                 
+                // Leave the DispatchGroup when last movie fetching is done.
                 if movIndex == movies.count - 1 {
                     self.dispatchGroup.leave()
                 }
             })
         }
         
+        // Notify when background fetch request is done. Handle completion in main queue.
         dispatchGroup.notify(queue: .main) {
-            print(detailedMovies)
-            completion(detailedMovies, err)
+            completion(detailedMovies, fetchError)
         }
     }
 }
