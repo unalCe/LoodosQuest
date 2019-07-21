@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20DB284997C3593E577595A7 /* Pods_LoodosQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F909FFD355D51C01A09383 /* Pods_LoodosQuest.framework */; };
+		901D4F3422E4958D0020B975 /* BlurViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901D4F3322E4958D0020B975 /* BlurViewExtension.swift */; };
 		90794F8122DE1F9F001A8C5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90794F8022DE1F9F001A8C5F /* AppDelegate.swift */; };
 		90794F8322DE1F9F001A8C5F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90794F8222DE1F9F001A8C5F /* SplashViewController.swift */; };
 		90794F8622DE1F9F001A8C5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90794F8422DE1F9F001A8C5F /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		06F909FFD355D51C01A09383 /* Pods_LoodosQuest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoodosQuest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F696E5E8594977933C0EFD6 /* Pods-LoodosQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoodosQuest.release.xcconfig"; path = "Target Support Files/Pods-LoodosQuest/Pods-LoodosQuest.release.xcconfig"; sourceTree = "<group>"; };
+		901D4F3322E4958D0020B975 /* BlurViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurViewExtension.swift; sourceTree = "<group>"; };
 		90794F7D22DE1F9F001A8C5F /* LoodosQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoodosQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90794F8022DE1F9F001A8C5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90794F8222DE1F9F001A8C5F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				90794F8022DE1F9F001A8C5F /* AppDelegate.swift */,
 				908F72C322E090C20065FADF /* APIParameters.swift */,
 				907FDF2322E43A8200ECE25A /* AttributedStringHelper.swift */,
+				901D4F3322E4958D0020B975 /* BlurViewExtension.swift */,
 				90794F8722DE1FA0001A8C5F /* Assets.xcassets */,
 				90794F8922DE1FA0001A8C5F /* LaunchScreen.storyboard */,
 				90794F8C22DE1FA0001A8C5F /* Info.plist */,
@@ -279,6 +282,7 @@
 				90794F8122DE1F9F001A8C5F /* AppDelegate.swift in Sources */,
 				908F72BD22DF253D0065FADF /* HomeViewController.swift in Sources */,
 				908F72C222E0652C0065FADF /* MovieDBFetcher.swift in Sources */,
+				901D4F3422E4958D0020B975 /* BlurViewExtension.swift in Sources */,
 				907FDF2022E3A8E700ECE25A /* MovieDetailViewController.swift in Sources */,
 				908F72C022DFA7F60065FADF /* Movie.swift in Sources */,
 			);

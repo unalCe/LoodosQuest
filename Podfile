@@ -10,6 +10,8 @@ target 'LoodosQuest' do
   pod 'Hero', '~> 1.4.0'
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
+  pod 'NVActivityIndicatorView', '~> 4.4.0'
+
   # Pods for LoodosQuest
 
 end

@@ -65,6 +65,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - NVActivityIndicatorView (4.4.1):
+    - NVActivityIndicatorView/Presenter (= 4.4.1)
+  - NVActivityIndicatorView/Presenter (4.4.1)
   - Protobuf (3.9.0)
   - SwiftyJSON (4.2.0)
 
@@ -74,6 +77,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig
   - Hero (~> 1.4.0)
   - Kingfisher (~> 4.10.0)
+  - NVActivityIndicatorView (~> 4.4.0)
   - SwiftyJSON (~> 4.2.0)
 
 SPEC REPOS:
@@ -90,6 +94,7 @@ SPEC REPOS:
     - Hero
     - Kingfisher
     - nanopb
+    - NVActivityIndicatorView
     - Protobuf
     - SwiftyJSON
 
@@ -106,9 +111,10 @@ SPEC CHECKSUMS:
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NVActivityIndicatorView: f0a6b0ed2973d9544da268f4eb76696f0a9577b0
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 5cd038d50711f57c909145e88927f67601d26d78
+PODFILE CHECKSUM: a06248979ab78599b85a708dfe828d21a3934c54
 
 COCOAPODS: 1.7.4

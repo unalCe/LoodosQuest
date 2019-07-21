@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     // MARK: - Properties
     @IBOutlet var homeTableView: UITableView!
+    var activityIndicator: NVActivityIndicatorView!
     
     // MovieDBFetcher object to handle networking with Alamofire.
     let movieDBFetcherService = MovieDBFetcher()
@@ -27,6 +29,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         setup(customTableView: homeTableView)
         setupSearchController()
+        setupActivityIndicatorView()
+        //startAnimatingActivityIndicator()
     }
     
 /**
@@ -39,6 +43,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter plotType: Short or full plot
  */
     private func fetchMovie(by fetchType: FetchType, withTitle title: String?, withID id: String?, in resultType: ResultType = .movie, with plotType: PlotType = .short) {
+        
+        DispatchQueue.main.async {
+            self.handleActivityIndicator()
+        }
         
         let apiParameters = APIParameters(apiKey: apiKey!, fetchType: fetchType, title: title, id: id, resultType: resultType, plotType: plotType)
         
@@ -59,6 +67,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         }
                         
                         self.homeTableView.reloadData()
+                        self.handleActivityIndicator()
                     } else {
                         // Debugging only.
                         print("Error while fetching detailed movies: " + err.debugDescription)
@@ -68,13 +77,30 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 // If the search results are not there, clear movies and show empty table view data
                 self.movies = []
                 self.homeTableView.reloadData()
+                self.handleActivityIndicator()
                 print("Error while fetching searched movies: " + err.debugDescription) }
         }
     }
     
+    // Start or stop activity animation depending on the current situation
+    private func handleActivityIndicator() {
+        let isActiveAlready = activityIndicator.isAnimating
+        
+        if isActiveAlready {
+            homeTableView.removeBlurEffect()
+            activityIndicator.stopAnimating()
+        } else {
+            homeTableView.addBlurEffect()
+            activityIndicator.startAnimating()
+        }
+        
+        homeTableView.isUserInteractionEnabled = isActiveAlready
+        activityIndicator.isHidden = isActiveAlready
+    }
+    
     // MARK: - Customizations
     // Setup Custom Table View
-    func setup(customTableView: UITableView) {
+    private func setup(customTableView: UITableView) {
         customTableView.delegate = self
         customTableView.dataSource = self
         customTableView.estimatedRowHeight = 360
@@ -83,7 +109,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // Setup Search Controller
-    func setupSearchController() {
+    private func setupSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
@@ -91,6 +117,18 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    // Setup Activity Indicator View for animating
+    private func setupActivityIndicatorView() {
+        let oneThirdOfTableWidth = homeTableView.bounds.width / 3
+        let frameForActivityIndicatorView = CGRect(x: oneThirdOfTableWidth, y: (navigationController?.navigationBar.frame.maxY)! + 160, width: oneThirdOfTableWidth, height: oneThirdOfTableWidth)
+        
+        activityIndicator = NVActivityIndicatorView(frame: frameForActivityIndicatorView)
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.type = .ballTrianglePath
+        activityIndicator.isHidden = true
     }
     
     // MARK: - SearchBar Delegate Methods
