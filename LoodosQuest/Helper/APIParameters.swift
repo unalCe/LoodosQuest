@@ -74,7 +74,8 @@ struct APIParameters {
         self.apiKey = apiKey
         self.title = apiTitle
         self.id = id
-        
+        self.resultType = resultType
+        self.plotType = plotType
         
         // Title and ID can't be searched at once.  Priority: Title
         if title != nil { self.id = nil }

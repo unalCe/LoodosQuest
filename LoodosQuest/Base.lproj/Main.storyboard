@@ -82,7 +82,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4LL-ao-F8h">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4LL-ao-F8h">
                                                     <rect key="frame" x="247" y="83.5" width="147" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre: Horror" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7W-kE-xsI">
@@ -91,7 +91,7 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMDB Score: x.x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd2-k4-Nqb">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMDB Score: x.x" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd2-k4-Nqb">
                                                             <rect key="frame" x="0.0" y="30.5" width="147" height="22.5"/>
                                                             <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -191,7 +191,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGI-vu-J1p">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGI-vu-J1p">
                                                 <rect key="frame" x="232" y="515" width="86.5" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -206,26 +206,27 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.1446645644" green="0.39271744089999999" blue="0.42896939070000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="TGI-vu-J1p" firstAttribute="top" secondItem="DXM-MR-PHf" secondAttribute="bottom" constant="10" id="3Qv-kf-9sH"/>
+                                            <constraint firstItem="yaa-BT-QtY" firstAttribute="bottom" secondItem="TGI-vu-J1p" secondAttribute="bottom" id="3Cp-FO-cAn"/>
                                             <constraint firstItem="TGI-vu-J1p" firstAttribute="leading" secondItem="DXM-MR-PHf" secondAttribute="leading" id="5fV-VU-Lxn"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TGI-vu-J1p" secondAttribute="trailing" constant="20" id="87S-w0-9Kc"/>
+                                            <constraint firstItem="yaa-BT-QtY" firstAttribute="top" secondItem="TGI-vu-J1p" secondAttribute="top" id="Bkv-gB-mHX"/>
                                             <constraint firstItem="DXM-MR-PHf" firstAttribute="leading" secondItem="1lg-Zm-FLl" secondAttribute="centerX" constant="25" id="D4D-JV-glo"/>
                                             <constraint firstItem="645-S5-qIV" firstAttribute="top" secondItem="VLH-H8-g8F" secondAttribute="bottom" constant="16" id="G9h-17-ImV"/>
                                             <constraint firstAttribute="trailing" secondItem="645-S5-qIV" secondAttribute="trailing" constant="20" id="HDV-9y-hee"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DXM-MR-PHf" secondAttribute="trailing" constant="20" id="Mhl-md-uAo"/>
+                                            <constraint firstItem="VLH-H8-g8F" firstAttribute="top" secondItem="TGI-vu-J1p" secondAttribute="bottom" constant="16" id="NNG-we-cyo"/>
                                             <constraint firstItem="1lg-Zm-FLl" firstAttribute="top" secondItem="r29-Xl-TfU" secondAttribute="top" constant="20" id="NuJ-j2-7OG"/>
-                                            <constraint firstItem="DXM-MR-PHf" firstAttribute="top" secondItem="1lg-Zm-FLl" secondAttribute="bottom" constant="16" id="P6m-RX-JG0"/>
                                             <constraint firstItem="HCw-9u-hqf" firstAttribute="leading" secondItem="r29-Xl-TfU" secondAttribute="leading" constant="20" id="ZF8-iz-DaE"/>
                                             <constraint firstAttribute="trailing" secondItem="1lg-Zm-FLl" secondAttribute="trailing" constant="40" id="cOl-Sz-kQC"/>
                                             <constraint firstItem="yaa-BT-QtY" firstAttribute="leading" secondItem="HCw-9u-hqf" secondAttribute="leading" id="ePk-qK-oxl"/>
                                             <constraint firstItem="1lg-Zm-FLl" firstAttribute="leading" secondItem="r29-Xl-TfU" secondAttribute="leading" constant="40" id="gQV-hV-Zed"/>
                                             <constraint firstItem="VLH-H8-g8F" firstAttribute="leading" secondItem="yaa-BT-QtY" secondAttribute="leading" id="gyK-0j-0F4"/>
                                             <constraint firstAttribute="trailing" secondItem="VLH-H8-g8F" secondAttribute="trailing" constant="20" id="iGp-MH-hZF"/>
+                                            <constraint firstItem="HCw-9u-hqf" firstAttribute="top" secondItem="DXM-MR-PHf" secondAttribute="top" id="pc1-Ls-NzS"/>
                                             <constraint firstAttribute="bottom" secondItem="645-S5-qIV" secondAttribute="bottom" constant="20" id="s17-Gl-bGP"/>
                                             <constraint firstItem="TGI-vu-J1p" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yaa-BT-QtY" secondAttribute="trailing" constant="15" id="tMQ-S0-6B7"/>
                                             <constraint firstItem="DXM-MR-PHf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HCw-9u-hqf" secondAttribute="trailing" constant="20" id="tfE-zL-JjM"/>
                                             <constraint firstItem="yaa-BT-QtY" firstAttribute="top" secondItem="HCw-9u-hqf" secondAttribute="bottom" constant="10" id="tis-GR-hPV"/>
-                                            <constraint firstItem="VLH-H8-g8F" firstAttribute="top" secondItem="yaa-BT-QtY" secondAttribute="bottom" constant="16" id="w1M-fO-e5e"/>
                                             <constraint firstItem="HCw-9u-hqf" firstAttribute="top" secondItem="1lg-Zm-FLl" secondAttribute="bottom" constant="16" id="yzM-0T-Vgb"/>
                                             <constraint firstItem="645-S5-qIV" firstAttribute="leading" secondItem="r29-Xl-TfU" secondAttribute="leading" constant="20" id="zto-b7-bfD"/>
                                         </constraints>

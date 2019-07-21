@@ -49,6 +49,7 @@ class FeedTableViewCell: UITableViewCell {
         // Retrieve the image with Kingfisher.
         imageRetrieveTask = imageView.kf.setImage(
             with: url,
+            placeholder: UIImage(named: "NoMovieImage"),
             options: [
                 .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),

@@ -117,8 +117,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // TODO: Try UITableViewDataSourcePrefetchingDelegate protocol
     //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    //        let cell = homeTableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! FeedTableViewCell
-    //        cell.movie = self.movies?[indexPath.row]
+    //
     //    }
     
     // MARK: - Navigation

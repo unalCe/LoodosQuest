@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import FirebaseAnalytics
 
 class MovieDetailViewController: UIViewController {
 
@@ -21,35 +22,54 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var plotLabel: UILabel!
     
-    var movie: Movie?
+    //
+    var movie: Movie? {
+        didSet {
+            fetchFullPlot(for: movie!)
+        }
+    }
     
+    // MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navigationItem.largeTitleDisplayMode = .always
 
         updateUI()
     }
     
-    private func updateUI() {
-        navigationItem.title = movie?.title
-        plotLabel.text = movie?.plot
-        genreLabel.text = movie?.genre
-        yearLabel.text = movie?.year
-        lenghtLabel.text = movie?.runtime
-        actorsLabel.text = movie?.actors
-        languageLabel.text = movie?.language
+    
+    
+    private func fetchFullPlot(for movie: Movie) {
+        let moviePlotFetcher = MovieDBFetcher()
+        moviePlotFetcher.fetch(with: APIParameters(apiKey: apiKey!, fetchType: .id, title: nil, id: movie.imdbID, resultType: .movie, plotType: .full)) { (movs, err) in
+            if err == nil, let movie = movs?.first {
+                DispatchQueue.main.async {
+                    self.plotLabel.text = movie.plot
+                    Analytics.logEvent("movie_viewed", parameters: ["movie_id": movie.imdbID, "movie_name" : movie.title])
+                }
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    /// Update UI according to movie properties
+    private func updateUI() {
+        navigationItem.title = movie?.title
+        
+        // No need to set activity indicator here, images already cached by url.
+        movieImageView.kf.setImage(with: movie?.poster, placeholder: UIImage(named: "NoMovieImage"), options: [
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+            ])
+        movieImageView.layer.cornerRadius = 16
+        movieImageView.clipsToBounds = true
+        
+        // Set label texts to movie information.
+        genreLabel.attributedText = NSMutableAttributedString().bold("Genre: ").normal(movie?.genre ?? "Unknown")
+        yearLabel.attributedText = NSMutableAttributedString().bold("Year: ").normal(movie?.year ?? "Unknown")
+        lenghtLabel.attributedText = NSMutableAttributedString().bold("Lenght: ").normal(movie?.runtime ?? "Unknown")
+        actorsLabel.attributedText = NSMutableAttributedString().bold("Actors: ").normal(movie?.actors ?? "Unknown")
+        languageLabel.attributedText = NSMutableAttributedString().bold("Language: ").normal(movie?.language ?? "Unknown")
     }
-    */
-
 }
