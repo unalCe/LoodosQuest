@@ -38,15 +38,17 @@ class MovieDetailViewController: UIViewController {
         updateUI()
     }
     
-    
-    
+    /// Fetch full plot for a detailed movie description.
     private func fetchFullPlot(for movie: Movie) {
         let moviePlotFetcher = MovieDBFetcher()
         moviePlotFetcher.fetch(with: APIParameters(apiKey: apiKey!, fetchType: .id, title: nil, id: movie.imdbID, resultType: .movie, plotType: .full)) { (movs, err) in
             if err == nil, let movie = movs?.first {
                 DispatchQueue.main.async {
+                    // Set the plot text when fetching is complete.
                     self.plotLabel.text = movie.plot
-                    Analytics.logEvent("movie_viewed", parameters: ["movie_id": movie.imdbID, "movie_name" : movie.title])
+                    
+                    // Log event depending on the needed information
+                    Analytics.logEvent("movie_viewed", parameters: ["movie_id": movie.imdbID, "movie_name" : movie.title, "movie_genre": (movie.genre ?? "Unknown")])
                 }
             }
         }

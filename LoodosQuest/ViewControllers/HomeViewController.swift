@@ -64,7 +64,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         print("Error while fetching detailed movies: " + err.debugDescription)
                     }
                 })
-            } else { print("Error while fetching searched movies: " + err.debugDescription) }
+            } else {
+                // If the search results are not there, clear movies and show empty table view data
+                self.movies = []
+                self.homeTableView.reloadData()
+                print("Error while fetching searched movies: " + err.debugDescription) }
         }
     }
     
@@ -100,7 +104,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movies.count
+        if movies.count == 0 {
+            let noMovieImageView: UIImageView = {
+                let miv = UIImageView()
+                miv.image = UIImage(named: "noMoviesFound")
+                miv.contentMode = .scaleAspectFit
+                return miv
+            }()
+            homeTableView.backgroundView = noMovieImageView
+        } else {
+            homeTableView.backgroundView = nil
+        }
+        
+        return movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
